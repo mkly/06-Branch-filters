@@ -22,15 +22,15 @@ jobs:
 
 workflows:
   version: 2
-  build-test-and-deploy:
+  build-test-and-test:
     jobs:
       - build
       - test-production:
           requires:
             - build
       - deploy:
-          branches:
-            only:
-              - production
           requires:
             - test-production
+          filters:
+            branches:
+              only: production
